@@ -17,38 +17,6 @@ interface Content {
   Backend?: ContentItem;
   Others?: ContentItem;
 }
-type TechSkillType = {
-  Frontend: {
-    title: string;
-    metadesc: string;
-    point1: string;
-    point2: string;
-    point3: string;
-    point4: string;
-    point5: string;
-    desc: string;
-  };
-  Backend: {
-    title: string;
-    metadesc: string;
-    point1: string;
-    point2: string;
-    point3: string;
-    point4: string;
-    point5: string;
-    desc: string;
-  };
-  Others: {
-    title: string;
-    metadesc: string;
-    point1: string;
-    point2: string;
-    point3: string;
-    point4: string;
-    point5: string;
-    desc: string;
-  };
-};
 
 
 export function CardSpotlightDemo({ profile, content }: { profile: keyof Content, content: Content }) {
