@@ -1,13 +1,25 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import BoxReveal from "@/components/ui/box-reveal";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
-export async function BoxRevealDemo({ title }: { title: string }) {
-  const { theme } = useTheme;
+export function BoxRevealDemo({ title }: { title: string }) {
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // This ensures the component is only rendered on the client side
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // If the component is not yet mounted (server-side), return null or a fallback
+  if (!mounted) return null;
+
   return (
     <div className="main-wrapper flex justify-between ">
-      <div className="size-full max-w-lg   overflow-hidden ">
+      <div className="size-full max-w-lg overflow-hidden">
         <BoxReveal boxColor={"#5046e6"} duration={0.5}>
           <p className="text-[3rem] font-semibold">
             {title}
@@ -53,6 +65,7 @@ export async function BoxRevealDemo({ title }: { title: string }) {
           <Button className="mt-[1.6rem] bg-[#5046e6]">Explore</Button>
         </BoxReveal>
       </div>
+
       <div className="project-img bg-green-200 h-full w-full mb-7">
         <Image
           src="https://github.com/GautamBisht12/Portfolio-1/blob/main/public/assets/chat-app.png?raw=true"

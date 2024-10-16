@@ -1,60 +1,82 @@
 import { CardSpotlight } from "@/components/ui/card-spotlight";
 import { AnimatedTooltipPreview } from "./ToolTip";
 
-export function CardSpotlightDemo({ profile, content }) {
-  if (!content || !content.Frontend) {
+
+interface ContentItem {
+  title: string;
+  metadesc: string;
+  point1: string;
+  point2: string;
+  point3: string;
+  point4: string;
+  desc: string;
+}
+
+interface Content {
+  Frontend?: ContentItem;
+  Backend?: ContentItem;
+  Others?: ContentItem;
+}
+type TechSkillType = {
+  Frontend: {
+    title: string;
+    metadesc: string;
+    point1: string;
+    point2: string;
+    point3: string;
+    point4: string;
+    point5: string;
+    desc: string;
+  };
+  Backend: {
+    title: string;
+    metadesc: string;
+    point1: string;
+    point2: string;
+    point3: string;
+    point4: string;
+    point5: string;
+    desc: string;
+  };
+  Others: {
+    title: string;
+    metadesc: string;
+    point1: string;
+    point2: string;
+    point3: string;
+    point4: string;
+    point5: string;
+    desc: string;
+  };
+};
+
+
+export function CardSpotlightDemo({ profile, content }: { profile: keyof Content, content: Content }) {
+  if (!content || !content[profile]) {
     return <p>Content not available</p>; // Fallback in case of undefined content
   }
+
+  const currentContent = content[profile];
+
   return (
     <CardSpotlight className="h-auto w-96">
-      <h2>{(profile === "Frontend" && content.Frontend.title) ||
-          (profile === "Backend" && content.Backend.title) ||
-          (profile === "Others" && content.Others.title)}</h2>
+      <h2>{currentContent?.title}</h2>
       <p className="text-base font-bold relative z-20 mt-2 text-white">
-        {(profile === "Frontend" && content.Frontend.metadesc) ||
-          (profile === "Backend" && content.Backend.metadesc) ||
-          (profile === "Others" && content.Others.metadesc)}
+        {currentContent?.metadesc}
       </p>
       <div className="text-neutral-200 mt-4 relative z-20 text-sm">
         <ul className="list-none mt-2">
-          <Step
-            title={
-              (profile === "Frontend" && content.Frontend.point1) ||
-              (profile === "Backend" && content.Backend.point1) ||
-              (profile === "Others" && content.Others.point1)
-            }
-          />
-          <Step
-            title={
-              (profile === "Frontend" && content.Frontend.point2) ||
-              (profile === "Backend" && content.Backend.point2) ||
-              (profile === "Others" && content.Others.point2)
-            }
-          />
-          <Step
-            title={
-              (profile === "Frontend" && content.Frontend.point3) ||
-              (profile === "Backend" && content.Backend.point3) ||
-              (profile === "Others" && content.Others.point3)
-            }
-          />
-          <Step
-            title={
-              (profile === "Frontend" && content.Frontend.point4) ||
-              (profile === "Backend" && content.Backend.point4) ||
-              (profile === "Others" && content.Others.point4)
-            }
-          />
+          <Step title={currentContent?.point1} />
+          <Step title={currentContent?.point2} />
+          <Step title={currentContent?.point3} />
+          <Step title={currentContent?.point4} />
         </ul>
       </div>
       <p className="text-neutral-300 mt-4 relative z-20 text-sm">
-        {(profile === "Frontend" && content.Frontend.desc) ||
-          (profile === "Backend" && content.Backend.desc) ||
-          (profile === "Others" && content.Others.desc)}
+        {currentContent?.desc}
       </p>
-      <div className="mt-5  w-[250px]">
-      <AnimatedTooltipPreview/>
-
+      <div className="mt-5 w-[250px]">
+        <AnimatedTooltipPreview />
       </div>
     </CardSpotlight>
   );

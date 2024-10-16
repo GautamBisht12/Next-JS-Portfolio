@@ -1,8 +1,7 @@
 "use client";
 import React from "react";
 import  {Button}  from "./ui/moving-border";
-import Image from "next/image";
-import { FaJs ,FaReact } from "react-icons/fa";
+
 
 
 export function MovingBorderDemo({content , icon}) {
